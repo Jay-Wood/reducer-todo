@@ -19,16 +19,10 @@ export const listReducer = (state, action) => {
                 id: Date.now(),
                 completed: false
             };
-            return {
-                ...state, 
-                itemArray: [...state.itemArray, newItem]
-            };
+            return {...state, itemArray: [...state.itemArray, newItem] };
 
         case "CLEAR_COMPLETED":
-            return {
-                ...state, 
-                itemArray: state.itemArray.filter(item => !item.completed)
-            };
+            return {...state, itemArray: state.itemArray.filter(item => !item.completed)};
 
         case "TOGGLE_ITEM": {
             return {

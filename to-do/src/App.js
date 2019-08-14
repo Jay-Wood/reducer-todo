@@ -20,6 +20,7 @@ function App() {
   const clearCompleted = () => {
     dispatch ({ type: "CLEAR_COMPLETED"});
   }
+  
   return (
     <div className="App">
       <h1>To Do List</h1>
