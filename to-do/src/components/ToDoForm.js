@@ -11,9 +11,10 @@ const ToDoForm = (props) => {
     };
     
     return (
-        <form 
+        // <form 
             // onSubmit={this.submitItem}
-        >
+        // >
+        <div>
             <input 
                 type="text" 
                 placeholder="Add new item"
@@ -21,9 +22,10 @@ const ToDoForm = (props) => {
                 // value={props.state.item}
                 onChange={handleChanges}
             />
-            <button onClick={() => dispatch({ type: "ADD_ITEM", payload: newItemText})}>Add Item</button>
+            <button onClick={ () => dispatch({ type: "ADD_ITEM", payload: newItemText})}>Add Item</button>
             <button>Clear Completed Items</button>
-        </form>
+        </div>
+        // </form>
     )
 
 } 

@@ -42,15 +42,11 @@ export const listReducer = (state, action) => {
             completed: false
         }
         return {
-            ...state, newItem
+            ...state, itemArray: [...state.itemArray, newItem]
             // editing: !state.editing
         };
      }; 
-     case "ADD_ITEM": {
-         return {
 
-        };
-     };
     default: return state;
  }
 }
