@@ -1,27 +1,18 @@
-import React, { useState, useReducer, useEffect } from "react";
-import ToDoItem from "./ToDoItem";
-import { initialList, listReducer } from "../reducers/ToDoReducer";
+import React from "react";
 
-const ToDoList = () => {
-    // useReducer - takes in a reducer, and an initialState obj
-    // returns - a state obj, and the dispatch fn
-    const [state, dispatch] = useReducer(listReducer, initialList);
-    console.log("State", state);
-
-        return(
-            <div>
-                {console.log("state",state)}
-                {state.itemArray.map(listItem => (
-                    <ToDoItem 
-                        name={listItem.text}
-                        key={listItem.id}
-                        completed={listItem.completed}
-                        editing={listItem.editing}
-                    />
-                ))}
-            </div>
-        )
-
+const ToDoList = ( {itemArray, toggleItem} ) => {
+    return(
+        <div>
+            {itemArray.map(listItem => (
+                <div key={listItem.id}
+                    onClick={() => toggleItem(listItem.id)}
+                    className={listItem.completed ? "completed" : ""}
+                >
+                    {listItem.text}                                                
+                </div>
+            ))}
+        </div>
+    )
 }
 
 export default ToDoList;

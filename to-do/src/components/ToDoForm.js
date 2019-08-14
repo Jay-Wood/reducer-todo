@@ -1,31 +1,36 @@
-import React, { useState, useReducer } from "react";
-import ToDoItem from "./ToDoItem";
-import { initialList, listReducer } from "../reducers/ToDoReducer";
+import React, { useState } from "react";
 
-const ToDoForm = (props) => {
-    const [newItemText, setNewItemText] = useState();
-    const [state, dispatch] = useReducer(listReducer, initialList);
+const ToDoForm = ( { addItem, clearCompleted } ) => {
+    const [newItemText, setNewItemText] = useState("");
 
     const handleChanges = e => {
         setNewItemText(e.target.value);
     };
+    const handleSubmit = e => {
+        e.preventDefault();
+        addItem(newItemText);
+        setNewItemText("");
+    }
     
+    const handleClear = e => {
+        e.preventDefault();
+        clearCompleted();
+    }
+
     return (
-        // <form 
-            // onSubmit={this.submitItem}
-        // >
-        <div>
+        <form 
+            onSubmit={handleSubmit}
+        >
             <input 
                 type="text" 
                 placeholder="Add new item"
                 name="item"
-                // value={props.state.item}
+                value={newItemText}
                 onChange={handleChanges}
             />
-            <button onClick={ () => dispatch({ type: "ADD_ITEM", payload: newItemText})}>Add Item</button>
-            <button>Clear Completed Items</button>
-        </div>
-        // </form>
+            <button type="submit"> Add Item</button>
+            <button onClick={handleClear}>Clear Completed Items</button>
+        </form>
     )
 
 } 

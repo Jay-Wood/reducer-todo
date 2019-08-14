@@ -1,52 +1,50 @@
-import React from "react";
-
-export const initialList = {
+export const initialState = {
     itemArray: [
       {
         text: "Pick up laundry",
-        editing: false,
         id: Date.now(),
         completed: false
-      },
-      {
-        text: "Sick up laundry",
-        editing: false,
-        id: Date.now(),
-        completed: false
-      },
-      {
-        text: "Quick up laundry",
-        editing: false,
-        id: Date.now(),
-        completed: false
-      },
-    ]
+      }
+    ],
 }
 
-export default initialList;
+export default initialState;
 
 export const listReducer = (state, action) => {
-    
+    console.log("Action", action)    
+    switch (action.type) {
+        case "ADD_ITEM": 
+            const newItem = {
+                text: action.payload,
+                id: Date.now(),
+                completed: false
+            };
+            return {
+                ...state, 
+                itemArray: [...state.itemArray, newItem]
+            };
 
- switch (action.type) {
-     case "TOGGLE_EDITING":
-         return {
-             ...state, 
-             editing: !state.editing
-         };
-     case "ADD_ITEM": {
-        const newItem = {
-            text: action.payload,
-            editing: false,
-            id: Date.now(),
-            completed: false
-        }
-        return {
-            ...state, itemArray: [...state.itemArray, newItem]
-            // editing: !state.editing
-        };
-     }; 
+        case "CLEAR_COMPLETED":
+            return {
+                ...state, 
+                itemArray: state.itemArray.filter(item => !item.completed)
+            };
 
-    default: return state;
- }
+        case "TOGGLE_ITEM": {
+            return {
+                ...state, 
+                itemArray: state.itemArray.map(item => {
+                    if(item.id === action.payload) {
+                        return {
+                            ...item, 
+                            completed: !item.completed
+                        };
+                    } else {
+                        return item; 
+                    }
+                })
+            }
+        }              
+        default: return state;
+    }
 }

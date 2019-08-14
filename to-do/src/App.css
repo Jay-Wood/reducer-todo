@@ -34,3 +34,7 @@
   margin: 2%;
   padding: 1%;
 }
+
+.completed{
+  text-decoration: line-through;
+}
